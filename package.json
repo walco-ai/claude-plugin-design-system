@@ -1,12 +1,12 @@
 {
-  "name": "@cawin/claude-plugin-design-system",
+  "name": "@walco-ai/claude-plugin-design-system",
   "version": "0.3.1",
   "description": "Design tokens, base components and patterns for the web interfaces of Claude Code plugins.",
   "license": "MIT",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cocofly59/claude-plugin-design-system.git"
+    "url": "git+https://github.com/walco-ai/claude-plugin-design-system.git"
   },
   "files": [
     "dist"

@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
+import { type ReactNode, useRef } from "react";
 import { cx } from "../../internal/cx";
+import { useIndicator } from "../../internal/useIndicator";
 
 export interface SwitchOption<T extends string> {
   id: T;
@@ -19,8 +20,10 @@ export interface SegmentedControlProps<T extends string> {
 
 /** A choice between a few views, side by side in one track, the selected one filled; no option changes size. */
 export function SegmentedControl<T extends string>({ options, value, onChange, label, fullWidth = false, className }: SegmentedControlProps<T>) {
+  const group = useRef<HTMLDivElement>(null);
+  useIndicator(group, ".cpds-segmented__option[aria-pressed='true']", value);
   return (
-    <div role="group" aria-label={label} className={cx("cpds-segmented", fullWidth && "cpds-segmented--full-width", className)}>
+    <div ref={group} role="group" aria-label={label} className={cx("cpds-segmented", fullWidth && "cpds-segmented--full-width", className)}>
       {options.map((option) => (
         <button
           key={option.id}

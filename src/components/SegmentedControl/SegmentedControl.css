@@ -1,4 +1,6 @@
 .cpds-segmented {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   box-sizing: border-box;
   gap: var(--space-1);
@@ -26,6 +28,10 @@
   line-height: var(--line-height-control);
   white-space: nowrap;
   cursor: pointer;
+  position: relative;
+  transition:
+    color var(--duration-fast) var(--easing-standard),
+    transform var(--duration-fast) var(--easing-standard);
 }
 
 .cpds-segmented--full-width > .cpds-segmented__option {
@@ -46,7 +52,41 @@
 }
 
 .cpds-segmented__option[aria-pressed="true"] {
-  border-color: var(--color-accent);
-  background-color: var(--color-accent);
+  border-color: transparent;
+  background-color: transparent;
   color: var(--color-on-accent);
+}
+
+/* One accent block, drawn under the options, sits behind the selected one. */
+.cpds-segmented::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: var(--cpds-indicator-w, 0);
+  height: var(--cpds-indicator-h, 0);
+  border-radius: var(--radius-control);
+  background-color: var(--color-accent);
+  content: "";
+  transform: translate(var(--cpds-indicator-x, 0), var(--cpds-indicator-y, 0));
+}
+
+.cpds-segmented[data-indicator-ready]::before {
+  transition:
+    transform var(--duration-slow) var(--easing-standard),
+    width var(--duration-slow) var(--easing-standard);
+}
+
+.cpds-segmented__option:active {
+  transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpds-segmented[data-indicator-ready]::before {
+    transition: none;
+  }
+
+  .cpds-segmented__option:active {
+    transform: none;
+  }
 }

@@ -2,6 +2,52 @@
   display: flex;
   align-items: center;
   gap: var(--space-2-5);
+  animation: cpds-banner-enter var(--duration-slow) var(--easing-standard);
+}
+
+/* The exit fades the banner while it rises, then closes its height and the space below it. */
+.cpds-banner[data-leaving] {
+  overflow: hidden;
+  interpolate-size: allow-keywords;
+  /* The stack's gap closes with the banner, so that nothing jumps when it leaves. */
+  --cpds-banner-closed-gap: calc(var(--space-4) * -1);
+  animation:
+    cpds-banner-leave var(--duration-moderate) var(--easing-standard) forwards,
+    cpds-banner-collapse var(--duration-moderate) var(--easing-smooth) var(--duration-moderate) forwards;
+}
+
+@keyframes cpds-banner-enter {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--space-2) * -1));
+  }
+}
+
+@keyframes cpds-banner-leave {
+  to {
+    opacity: 0;
+    transform: translateY(calc(var(--space-1) * -1));
+  }
+}
+
+@keyframes cpds-banner-collapse {
+  from {
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  to {
+    height: 0;
+    padding-block: 0;
+    margin-bottom: var(--cpds-banner-closed-gap);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpds-banner,
+  .cpds-banner[data-leaving] {
+    animation: none;
+  }
 }
 
 .cpds-banner--info {

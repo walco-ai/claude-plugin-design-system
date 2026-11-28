@@ -57,7 +57,10 @@
   .cpds-banner,
   .cpds-banner[data-leaving],
   .cpds-field__error,
-  .cpds-field__error--leaving {
+  .cpds-field__error--leaving,
+  .cpds-live--live .cpds-live__dot,
+  .cpds-pulse-a,
+  .cpds-pulse-b {
     animation: none;
   }
 }

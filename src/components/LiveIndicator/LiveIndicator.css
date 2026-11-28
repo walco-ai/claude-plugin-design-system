@@ -41,9 +41,3 @@
     box-shadow: 0 0 0 var(--space-1-5) var(--halo-end);
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .cpds-live__dot {
-    animation: none;
-  }
-}

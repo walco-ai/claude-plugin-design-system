@@ -1,11 +1,16 @@
 .cpds-link {
   border-radius: var(--radius-control);
-  text-decoration: none;
+  /* The underline is always there, transparent at rest, so that its color can fade with the text. */
+  text-decoration: underline;
+  text-decoration-color: transparent;
   text-underline-offset: 0.2em;
+  transition-property: color, text-decoration-color;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--easing-standard);
 }
 
 .cpds-link:hover {
-  text-decoration: underline;
+  text-decoration-color: currentcolor;
 }
 
 .cpds-link:focus-visible {

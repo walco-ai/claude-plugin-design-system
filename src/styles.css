@@ -28,3 +28,4 @@
 @import "./components/PillButton/PillButton.css";
 @import "./components/ChangeBar/ChangeBar.css";
 @import "./components/TruncatedPath/TruncatedPath.css";
+@import "./reduced-motion.css";

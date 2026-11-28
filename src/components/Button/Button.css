@@ -81,16 +81,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .cpds-button__lead {
-    transition: none;
-  }
-
-  .cpds-button__spinner {
-    animation: none;
-  }
-}
-
 .cpds-button--primary {
   padding: 0 var(--space-5);
   background-color: var(--color-accent);

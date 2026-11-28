@@ -2,6 +2,7 @@
 @import "./tokens.css";
 @import "./base.css";
 @import "./tones.css";
+@import "./internal/tone-motion.css";
 @import "./components/Icon/Icon.css";
 @import "./components/Button/Button.css";
 @import "./components/IconButton/IconButton.css";

@@ -1,4 +1,5 @@
 import { cx } from "../../internal/cx";
+import { useTonePulse } from "../../internal/useTonePulse";
 import { VisuallyHidden } from "../VisuallyHidden/VisuallyHidden";
 
 /**
@@ -16,8 +17,9 @@ export interface StatusDotProps {
 
 /** A small dot in the tone of a state, filled for an active state, outlined for one that has not started. */
 export function StatusDot({ status, label, className }: StatusDotProps) {
+  const pulse = useTonePulse(status);
   return (
-    <span className={cx("cpds-status-dot", `cpds-status-dot--${status}`, className)} aria-hidden={label === undefined ? true : undefined}>
+    <span className={cx("cpds-status-dot", `cpds-status-dot--${status}`, pulse, className)} aria-hidden={label === undefined ? true : undefined}>
       {label !== undefined && <VisuallyHidden>{label}</VisuallyHidden>}
     </span>
   );

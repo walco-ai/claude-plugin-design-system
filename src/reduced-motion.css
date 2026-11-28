@@ -23,6 +23,9 @@
 
   .cpds-button__lead,
   .cpds-segmented[data-indicator-ready]::before,
+  .cpds-tabs__list[data-indicator-ready]::after,
+  .cpds-tabs__panel,
+  .cpds-tabs__panel[data-active],
   .cpds-choice__input[type]::before,
   .cpds-choice__input[type]:checked::before,
   .cpds-collapsible__chevron,

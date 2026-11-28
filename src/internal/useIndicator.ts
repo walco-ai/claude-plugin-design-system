@@ -20,9 +20,9 @@ export function useIndicator(container: RefObject<HTMLElement | null>, selector:
       host.style.setProperty("--cpds-indicator-y", `${String(target.offsetTop)}px`);
       host.style.setProperty("--cpds-indicator-w", `${String(target.offsetWidth)}px`);
       host.style.setProperty("--cpds-indicator-h", `${String(target.offsetHeight)}px`);
-      if (!ready.current) {
-        ready.current = true;
+      if (!ready.current && frame === 0) {
         frame = requestAnimationFrame(() => {
+          ready.current = true;
           host.dataset["indicatorReady"] = "";
         });
       }

@@ -1,0 +1,42 @@
+/*
+ * The one reduced-motion rule of the package: moves, size changes, opacity fades and loops stop; color changes keep
+ * fading over their usual duration. What appears or disappears does so at once. Imported after every component, so
+ * that it outranks their rules of the same weight.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :is(.cpds-button, .cpds-icon-button, .cpds-pill-button) {
+    transition-property: background-color, border-color, color, filter;
+  }
+
+  :is(.cpds-button, .cpds-icon-button, .cpds-pill-button):active:not(:disabled) {
+    transform: none;
+  }
+
+  .cpds-button__lead,
+  .cpds-collapsible__chevron,
+  .cpds-collapsible--row > .cpds-collapsible__content,
+  .cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner,
+  .cpds-collapsible--row[data-expanded="true"] > .cpds-collapsible__content > .cpds-collapsible__inner {
+    transition: none;
+  }
+
+  .cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner > *,
+  .cpds-collapsible--row[data-expanded="true"] > .cpds-collapsible__content > .cpds-collapsible__inner > * {
+    transform: none;
+    transition: none;
+  }
+
+  .cpds-collapsible--card > .cpds-collapsible__content {
+    transition: border-top-color var(--duration-slow) var(--easing-standard);
+  }
+
+  .cpds-progress .cpds-progress__fill,
+  .cpds-progress[data-complete] .cpds-progress__fill {
+    transition: background-color var(--duration-moderate) var(--easing-standard);
+  }
+
+  .cpds-button__spinner,
+  .cpds-progress[data-complete] .cpds-progress__track {
+    animation: none;
+  }
+}

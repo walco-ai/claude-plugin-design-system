@@ -199,23 +199,3 @@
 .cpds-collapsible--card[data-selected] {
   border-color: var(--color-accent-border);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .cpds-collapsible__chevron,
-  .cpds-collapsible--row > .cpds-collapsible__content,
-  .cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner,
-  .cpds-collapsible--row[data-expanded="true"] > .cpds-collapsible__content > .cpds-collapsible__inner {
-    transition: none;
-  }
-
-  .cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner > * {
-    transform: none;
-    transition: none;
-  }
-
-  .cpds-collapsible--card > .cpds-collapsible__content {
-    transition:
-      opacity var(--duration-moderate) var(--easing-standard),
-      display var(--duration-moderate) allow-discrete;
-  }
-}

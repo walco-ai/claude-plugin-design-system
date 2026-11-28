@@ -7,6 +7,7 @@
 .cpds-tabs__list {
   display: flex;
   gap: var(--space-1);
+  position: relative;
   overflow-x: auto;
   border-bottom: var(--border-width) solid var(--color-border-subtle);
 }
@@ -29,6 +30,7 @@
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
+  transition: color var(--duration-fast) var(--easing-standard);
 }
 
 .cpds-tabs__tab:hover {
@@ -40,8 +42,8 @@
   outline-offset: calc(var(--focus-ring-width) * -1);
 }
 
+/* The selected tab's own underline stays transparent: the list's one underline is drawn under it. */
 .cpds-tabs__tab[aria-selected="true"] {
-  border-bottom-color: var(--color-accent);
   color: var(--color-accent-text);
 }
 
@@ -59,4 +61,45 @@
 /* inherit, never visible: a visible descendant would show through a hidden ancestor. */
 .cpds-tabs__panel[data-active] {
   visibility: inherit;
+}
+
+/* One underline, placed by useSelectedBox, slides to the selected tab; it sits there at once until the list is ready. */
+.cpds-tabs__list::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--indicator-w, 0);
+  height: var(--border-width-strong);
+  background-color: var(--color-accent);
+  content: "";
+  transform: translateX(var(--indicator-x, 0));
+}
+
+.cpds-tabs__list[data-indicator-ready]::after {
+  transition:
+    transform var(--duration-moderate) var(--easing-standard),
+    width var(--duration-moderate) var(--easing-standard);
+}
+
+/* The leaving panel fades out, then turns hidden; the coming one shows at once and fades in. */
+.cpds-tabs__panel {
+  opacity: 0;
+  transition:
+    opacity var(--duration-fast) var(--easing-standard),
+    visibility 0s linear var(--duration-fast);
+}
+
+.cpds-tabs__panel[data-active] {
+  opacity: 1;
+  transition:
+    opacity var(--duration-fast) var(--easing-standard),
+    visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpds-tabs__list[data-indicator-ready]::after,
+  .cpds-tabs__panel,
+  .cpds-tabs__panel[data-active] {
+    transition: none;
+  }
 }

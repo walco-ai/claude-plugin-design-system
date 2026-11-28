@@ -17,8 +17,14 @@
     transition-property: color;
   }
 
+  .cpds-choice__input {
+    transition-property: background-color, border-color;
+  }
+
   .cpds-button__lead,
   .cpds-segmented[data-indicator-ready]::before,
+  .cpds-choice__input[type]::before,
+  .cpds-choice__input[type]:checked::before,
   .cpds-collapsible__chevron,
   .cpds-collapsible--row > .cpds-collapsible__content,
   .cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner,
@@ -42,6 +48,8 @@
   }
 
   .cpds-button__spinner,
+  .cpds-choice__input:checked,
+  .cpds-choice__input[type]:checked::before,
   .cpds-progress[data-complete] .cpds-progress__track,
   .cpds-banner,
   .cpds-banner[data-leaving] {

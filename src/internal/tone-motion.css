@@ -25,9 +25,3 @@
     transform: scale(1.12);
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  :is(.cpds-pulse-a, .cpds-pulse-b) {
-    animation: none;
-  }
-}

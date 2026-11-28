@@ -1,6 +1,6 @@
 import { type KeyboardEvent, type ReactNode, useId, useRef } from "react";
 import { cx } from "../../internal/cx";
-import { useSelectedBox } from "../../internal/useSelectedBox";
+import { useIndicator } from "../../internal/useIndicator";
 import type { SwitchOption } from "../SegmentedControl/SegmentedControl";
 
 export interface TabsProps<T extends string> {
@@ -21,7 +21,7 @@ export interface TabsProps<T extends string> {
 export function Tabs<T extends string>({ tabs, value, onChange, label, panels, className }: TabsProps<T>) {
   const prefix = useId();
   const list = useRef<HTMLDivElement>(null);
-  useSelectedBox(list, '.cpds-tabs__tab[aria-selected="true"]', value);
+  useIndicator(list, '.cpds-tabs__tab[aria-selected="true"]', value);
   const move = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     const last = tabs.length - 1;
     const target = { ArrowRight: index === last ? 0 : index + 1, ArrowLeft: index === 0 ? last : index - 1, Home: 0, End: last }[event.key];

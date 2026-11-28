@@ -1,4 +1,7 @@
 .cpds-tabs {
+  /* The moderate duration, until the token stylesheet provides it. */
+  --duration-moderate: 240ms;
+
   display: flex;
   flex-direction: column;
   min-width: 0;

@@ -63,16 +63,16 @@
   visibility: inherit;
 }
 
-/* One underline, placed by useSelectedBox, slides to the selected tab; it sits there at once until the list is ready. */
+/* One underline, placed by useIndicator, slides to the selected tab; it sits there at once until the list is ready. */
 .cpds-tabs__list::after {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: var(--indicator-w, 0);
+  width: var(--cpds-indicator-w, 0);
   height: var(--border-width-strong);
   background-color: var(--color-accent);
   content: "";
-  transform: translateX(var(--indicator-x, 0));
+  transform: translateX(var(--cpds-indicator-x, 0));
 }
 
 .cpds-tabs__list[data-indicator-ready]::after {

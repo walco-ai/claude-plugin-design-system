@@ -47,14 +47,3 @@
     box-shadow: 0 0 0 var(--space-1) var(--color-success-bg);
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .cpds-progress .cpds-progress__fill,
-  .cpds-progress[data-complete] .cpds-progress__fill {
-    transition: background-color var(--duration-fast) var(--easing-standard);
-  }
-
-  .cpds-progress[data-complete] .cpds-progress__track {
-    animation: none;
-  }
-}

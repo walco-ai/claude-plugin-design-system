@@ -98,11 +98,3 @@
     opacity var(--duration-fast) var(--easing-standard),
     visibility 0s;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .cpds-tabs__list[data-indicator-ready]::after,
-  .cpds-tabs__panel,
-  .cpds-tabs__panel[data-active] {
-    transition: none;
-  }
-}

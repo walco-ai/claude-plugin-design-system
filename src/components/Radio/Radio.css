@@ -9,12 +9,6 @@
   cursor: pointer;
 }
 
-/* Stand-ins for the moderate and slow motion durations, until the token stylesheet defines them. */
-.cpds-choice {
-  --duration-moderate: 240ms;
-  --duration-slow: 320ms;
-}
-
 /*
  * A native checkbox or radio draws its own mark, which CSS cannot animate. The input stays native for the keyboard,
  * the form and assistive technologies, and draws itself with the same colors: accent fill, on-accent mark.

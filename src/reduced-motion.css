@@ -36,7 +36,9 @@
   }
 
   .cpds-button__spinner,
-  .cpds-progress[data-complete] .cpds-progress__track {
+  .cpds-progress[data-complete] .cpds-progress__track,
+  .cpds-banner,
+  .cpds-banner[data-leaving] {
     animation: none;
   }
 }

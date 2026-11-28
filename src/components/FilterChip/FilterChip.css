@@ -11,6 +11,9 @@
   line-height: var(--line-height-control);
   white-space: nowrap;
   cursor: pointer;
+  transition-property: color, background-color, border-color;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--easing-standard);
 }
 
 /* Off: outlined on the surface. On: the tone class gives the background and the text. */

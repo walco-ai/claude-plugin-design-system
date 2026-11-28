@@ -12,6 +12,17 @@
   cursor: pointer;
 }
 
+/* The outline stays out of the list: the focus ring appears at once. */
+.cpds-icon-button {
+  transition-property: background-color, border-color, color, filter, transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--easing-standard);
+}
+
+.cpds-icon-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
 .cpds-icon-button:focus-visible {
   outline: var(--focus-ring-width) solid var(--color-focus);
   outline-offset: var(--focus-ring-offset);

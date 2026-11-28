@@ -25,8 +25,36 @@
   height: 100%;
   border-radius: var(--radius-pill);
   background-color: var(--color-info-indicator);
+  transition:
+    width var(--duration-slow) var(--easing-standard),
+    background-color var(--duration-moderate) var(--easing-standard);
 }
 
+/* Reaching complete, the color waits for the fill to arrive; going back, it returns with the slide. */
 .cpds-progress[data-complete] .cpds-progress__fill {
   background-color: var(--color-success-indicator);
+  transition:
+    width var(--duration-slow) var(--easing-standard),
+    background-color var(--duration-moderate) var(--easing-standard) var(--duration-slow);
+}
+
+.cpds-progress[data-complete] .cpds-progress__track {
+  animation: cpds-progress-glow calc(var(--duration-slow) * 2) var(--easing-standard) var(--duration-slow);
+}
+
+@keyframes cpds-progress-glow {
+  40% {
+    box-shadow: 0 0 0 var(--space-1) var(--color-success-bg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpds-progress .cpds-progress__fill,
+  .cpds-progress[data-complete] .cpds-progress__fill {
+    transition: background-color var(--duration-fast) var(--easing-standard);
+  }
+
+  .cpds-progress[data-complete] .cpds-progress__track {
+    animation: none;
+  }
 }

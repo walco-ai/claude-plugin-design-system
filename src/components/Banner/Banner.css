@@ -43,6 +43,7 @@
   }
 }
 
+/* Stands in for the shared reduced-motion rule until it exists (joint of REQ-DS-200). */
 @media (prefers-reduced-motion: reduce) {
   .cpds-banner,
   .cpds-banner[data-leaving] {

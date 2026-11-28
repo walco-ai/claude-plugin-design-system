@@ -55,7 +55,9 @@
   .cpds-choice__input[type]:checked::before,
   .cpds-progress[data-complete] .cpds-progress__track,
   .cpds-banner,
-  .cpds-banner[data-leaving] {
+  .cpds-banner[data-leaving],
+  .cpds-field__error,
+  .cpds-field__error--leaving {
     animation: none;
   }
 }

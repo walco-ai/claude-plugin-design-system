@@ -237,5 +237,9 @@
 
   /* Motion */
   --duration-fast: 160ms;
+  --duration-moderate: 240ms;
+  --duration-slow: 320ms;
+  --duration-loop: 2s;
   --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }

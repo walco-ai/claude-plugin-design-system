@@ -8,11 +8,17 @@
     transition-property: background-color, border-color, color, filter;
   }
 
-  :is(.cpds-button, .cpds-icon-button, .cpds-pill-button):active:not(:disabled) {
+  :is(.cpds-button, .cpds-icon-button, .cpds-pill-button):active:not(:disabled),
+  .cpds-segmented__option:active {
     transform: none;
   }
 
+  .cpds-segmented__option {
+    transition-property: color;
+  }
+
   .cpds-button__lead,
+  .cpds-segmented[data-indicator-ready]::before,
   .cpds-collapsible__chevron,
   .cpds-collapsible--row > .cpds-collapsible__content,
   .cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner,

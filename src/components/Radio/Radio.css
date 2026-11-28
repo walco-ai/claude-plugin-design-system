@@ -9,13 +9,124 @@
   cursor: pointer;
 }
 
+/* Stand-ins for the moderate and slow motion durations, until the token stylesheet defines them. */
+.cpds-choice {
+  --duration-moderate: 240ms;
+  --duration-slow: 320ms;
+}
+
+/*
+ * A native checkbox or radio draws its own mark, which CSS cannot animate. The input stays native for the keyboard,
+ * the form and assistive technologies, and draws itself with the same colors: accent fill, on-accent mark.
+ */
 .cpds-choice__input {
+  display: grid;
   flex: none;
+  place-content: center;
   width: var(--size-choice);
   height: var(--size-choice);
   margin: 0;
+  box-sizing: border-box;
+  border: var(--border-width-strong) solid var(--color-border-control);
+  background-color: var(--color-surface);
   accent-color: var(--color-accent);
   cursor: inherit;
+  appearance: none;
+  transition:
+    background-color var(--duration-moderate) var(--easing-standard),
+    border-color var(--duration-moderate) var(--easing-standard),
+    border-width var(--duration-moderate) var(--easing-standard);
+}
+
+/* The box pops once when it becomes checked. */
+.cpds-choice__input:checked {
+  animation: cpds-choice-pop var(--duration-moderate) var(--easing-standard);
+}
+
+/* A checkbox's box is smaller than a control: half the control's radius keeps it square-ish. */
+.cpds-choice__input[type="checkbox"] {
+  --cpds-choice-box-radius: calc(var(--radius-control) / 2);
+
+  border-radius: var(--cpds-choice-box-radius);
+}
+
+.cpds-choice__input[type="checkbox"]:checked {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+}
+
+/*
+ * The check mark: the icon set's check path, used as a mask over the on-accent color. It is wiped from the right, and
+ * hidden once the wipe ends; it is drawn from the left after half the fast duration, once the box has started to fill.
+ */
+.cpds-choice__input[type="checkbox"]::before {
+  width: calc(var(--size-choice) - var(--space-1));
+  height: calc(var(--size-choice) - var(--space-1));
+  background-color: var(--color-on-accent);
+  content: "";
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition:
+    clip-path var(--duration-slow) var(--easing-standard),
+    opacity 0s linear var(--duration-slow);
+}
+
+.cpds-choice__input[type="checkbox"]:checked::before {
+  opacity: 1;
+  clip-path: inset(0);
+  transition:
+    clip-path var(--duration-slow) var(--easing-standard) calc(var(--duration-fast) / 2),
+    opacity 0s;
+}
+
+.cpds-choice__input[type="radio"] {
+  border-radius: var(--radius-pill);
+}
+
+/* The checked radio's ring thickens. */
+.cpds-choice__input[type="radio"]:checked {
+  border-width: calc(var(--border-width-strong) + var(--border-width));
+  border-color: var(--color-accent);
+}
+
+/*
+ * The dot grows past its size and settles when checked, and fades out when unchecked. At rest it keeps its size: a
+ * scale of zero there would hide it at once when the radio is unchecked, before its fade.
+ */
+.cpds-choice__input[type="radio"]::before {
+  width: calc(var(--size-choice) / 2);
+  height: calc(var(--size-choice) / 2);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent);
+  content: "";
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--easing-standard);
+}
+
+.cpds-choice__input[type="radio"]:checked::before {
+  opacity: 1;
+  animation: cpds-choice-dot var(--duration-slow) var(--easing-standard) forwards;
+}
+
+@keyframes cpds-choice-pop {
+  40% {
+    transform: scale(0.88);
+  }
+}
+
+@keyframes cpds-choice-dot {
+  0% {
+    transform: scale(0);
+  }
+
+  60% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .cpds-choice__input:focus-visible {

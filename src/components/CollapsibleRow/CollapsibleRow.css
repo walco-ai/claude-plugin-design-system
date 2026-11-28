@@ -121,7 +121,7 @@
 .cpds-collapsible--row > .cpds-collapsible__content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows var(--duration-fast) var(--easing-standard);
+  transition: grid-template-rows var(--duration-slow) var(--easing-standard);
 }
 
 .cpds-collapsible--row[data-expanded="true"] > .cpds-collapsible__content {
@@ -138,6 +138,59 @@
   background-color: var(--color-surface-subtle);
 }
 
+/* The content fades and slides: out over the fast duration, in over the moderate one after half of it. */
+.cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner {
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--easing-standard);
+}
+
+.cpds-collapsible--row[data-expanded="true"] > .cpds-collapsible__content > .cpds-collapsible__inner {
+  opacity: 1;
+  transition: opacity var(--duration-moderate) var(--easing-standard) calc(var(--duration-moderate) / 2);
+}
+
+.cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner > * {
+  transform: translateY(calc(var(--space-1) * -1));
+  transition: transform var(--duration-fast) var(--easing-standard);
+}
+
+.cpds-collapsible--row[data-expanded="true"] > .cpds-collapsible__content > .cpds-collapsible__inner > * {
+  transform: none;
+  transition: transform var(--duration-moderate) var(--easing-standard) calc(var(--duration-moderate) / 2);
+}
+
+/*
+ * Card: the content keeps the hidden attribute, yet opens and closes by its height. The display change is held
+ * for the transition (allow-discrete) and the open state starts from a closed box (@starting-style).
+ */
+.cpds-collapsible--card > .cpds-collapsible__content {
+  overflow: hidden;
+  height: auto;
+  interpolate-size: allow-keywords;
+  transition:
+    height var(--duration-slow) var(--easing-standard),
+    padding-block var(--duration-slow) var(--easing-standard),
+    border-top-color var(--duration-slow) var(--easing-standard),
+    opacity var(--duration-moderate) var(--easing-standard),
+    display var(--duration-slow) allow-discrete;
+}
+
+.cpds-collapsible--card > .cpds-collapsible__content[hidden] {
+  height: 0;
+  padding-block: 0;
+  border-top-color: transparent;
+  opacity: 0;
+}
+
+@starting-style {
+  .cpds-collapsible--card > .cpds-collapsible__content:not([hidden]) {
+    height: 0;
+    padding-block: 0;
+    border-top-color: transparent;
+    opacity: 0;
+  }
+}
+
 /* The current row of its list: tinted in the accent, whatever its variant. */
 .cpds-collapsible[data-selected] > .cpds-collapsible__trigger {
   background-color: var(--color-accent-subtle);
@@ -149,7 +202,20 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cpds-collapsible__chevron,
-  .cpds-collapsible--row > .cpds-collapsible__content {
+  .cpds-collapsible--row > .cpds-collapsible__content,
+  .cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner,
+  .cpds-collapsible--row[data-expanded="true"] > .cpds-collapsible__content > .cpds-collapsible__inner {
     transition: none;
+  }
+
+  .cpds-collapsible--row > .cpds-collapsible__content > .cpds-collapsible__inner > * {
+    transform: none;
+    transition: none;
+  }
+
+  .cpds-collapsible--card > .cpds-collapsible__content {
+    transition:
+      opacity var(--duration-moderate) var(--easing-standard),
+      display var(--duration-moderate) allow-discrete;
   }
 }

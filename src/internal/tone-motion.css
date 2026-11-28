@@ -1,0 +1,33 @@
+/* Status dots, status badges and badges fade their colors to a new tone and pulse once in scale. */
+:is(.cpds-status-dot, .cpds-status-badge, .cpds-badge) {
+  transition:
+    background-color var(--duration-moderate) var(--easing-standard),
+    border-color var(--duration-moderate) var(--easing-standard),
+    color var(--duration-moderate) var(--easing-standard);
+}
+
+.cpds-pulse-a {
+  animation: cpds-pulse-a var(--duration-moderate) var(--easing-standard);
+}
+
+.cpds-pulse-b {
+  animation: cpds-pulse-b var(--duration-moderate) var(--easing-standard);
+}
+
+@keyframes cpds-pulse-a {
+  40% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes cpds-pulse-b {
+  40% {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.cpds-pulse-a, .cpds-pulse-b) {
+    animation: none;
+  }
+}

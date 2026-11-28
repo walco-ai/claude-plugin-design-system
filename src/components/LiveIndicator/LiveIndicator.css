@@ -22,3 +22,28 @@
   border: var(--border-width-strong) solid var(--color-text-muted);
   background-color: transparent;
 }
+
+/* Only the live dot sends a halo; the offline ring stays still. */
+.cpds-live--live .cpds-live__dot {
+  --halo-start: color-mix(in srgb, var(--color-success-indicator) 45%, transparent);
+  --halo-end: color-mix(in srgb, var(--color-success-indicator) 0%, transparent);
+
+  animation: cpds-live-halo var(--duration-loop) var(--easing-standard) infinite;
+}
+
+@keyframes cpds-live-halo {
+  0% {
+    box-shadow: 0 0 0 0 var(--halo-start);
+  }
+
+  70%,
+  100% {
+    box-shadow: 0 0 0 var(--space-1-5) var(--halo-end);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpds-live__dot {
+    animation: none;
+  }
+}
